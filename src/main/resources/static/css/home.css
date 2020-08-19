@@ -1,0 +1,11 @@
+.pageTitle {
+    transition: all .2s ease-in-out;
+}
+.pageTitle:hover {
+    color: orange;
+    transform: rotate(-10deg) scale(1.1, 1.1);
+}
+
+.bi-pencil-square:hover {
+    fill: dodgerblue;
+}
