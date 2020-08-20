@@ -19,6 +19,13 @@ public class AdminController {
     @Autowired
     private OrderRepository orderRepository;
 
+    @GetMapping("")
+    public String adminHome(Model model){
+        List<Order> orders = orderRepository.findAllByStatus(OrderStatus.NEW);
+        model.addAttribute("new_orders", orders.size());
+        return "admin"; //resources/templates/admin.html
+    }
+
     @GetMapping("/orders")
     public String getAllOrders(@RequestParam(required = false) OrderStatus status, Model model) {
         List<Order> orders;

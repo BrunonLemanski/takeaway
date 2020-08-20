@@ -14,7 +14,6 @@
     <link href="/css/home.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 
-
 </head>
 <body>
 <header>
@@ -31,7 +30,7 @@
                         <li><a href="#" class="text-white">Follow on Twitter</a></li>
                         <li><a href="#" class="text-white">Like on Facebook</a></li>
                         <li><a href="#" class="text-white">Email me</a></li>
-                        <li><a href="#" class="text-white">Admin website</a></li>
+                        <li><a th:href="@{/admin}" href="#" class="text-white">Admin website</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,7 +50,6 @@
 </header>
 
 <main role="main">
-
     <section class="jumbotron text-center">
         <div class="container">
             <h1>TakeAway</h1>
