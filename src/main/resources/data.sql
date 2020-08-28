@@ -28,3 +28,11 @@ INSERT INTO order_item (order_id, item_id) VALUES
 (5, 4),
 (6, 4),
 (6, 4);
+
+INSERT INTO admin(id, login, password, role, created_on) VALUES
+(1, 'user1', 'pass', 'ADMIN', CURRENT_TIMESTAMP),
+(2, 'user2', 'pass', 'SUPER_ADMIN', CURRENT_TIMESTAMP),
+(3, 'user3', 'pass', 'ADMIN', CURRENT_TIMESTAMP),
+(4, 'user4', 'pass', 'ADMIN', CURRENT_TIMESTAMP),
+(5, 'user5', 'pass', 'SUPER_ADMIN', CURRENT_TIMESTAMP),
+(6, 'admin', 'pass', 'SUPER_ADMIN', CURRENT_TIMESTAMP);
