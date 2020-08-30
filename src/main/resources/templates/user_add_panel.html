@@ -54,10 +54,10 @@
         <div class="col-lg-8 offset-lg-2">
             <div class="shadow-lg p-3 mb-5 bg-white rounded">
                 <h3 class="display-4">Tworzenie użytkownika</h3>
-                <a class="btn btn-sm btn-outline-info d-inline" th:href="@{/admin/users}" href="#" role="button">Powrót do panelu użytkowników</a>
+                <a class="btn btn-sm btn-outline-info d-inline" th:href="@{/admin}" href="#" role="button">Powrót do panelu użytkowników</a>
                 <br/>
                 <br/>
-                <form th:action="@{/admin/users/edit}" method="post" th:object="${admin}">
+                <form th:action="@{/admin/users/add}" method="post" th:object="${admin}">
                     <div class="form-group">
                         <label for="loginInput">Login</label>
                         <input type="text" class="form-control" id="loginInput" aria-describedby="loginHelp" placeholder="Login użytkownika" th:field="*{login}">

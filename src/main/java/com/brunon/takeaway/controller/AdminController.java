@@ -1,9 +1,6 @@
 package com.brunon.takeaway.controller;
 
-import com.brunon.takeaway.model.Item;
-import com.brunon.takeaway.model.Order;
-import com.brunon.takeaway.model.OrderStatus;
-import com.brunon.takeaway.model.Admin;
+import com.brunon.takeaway.model.*;
 import com.brunon.takeaway.repository.AdminRepository;
 import com.brunon.takeaway.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +33,8 @@ public class AdminController {
     }
 
     @GetMapping("/users/add")
-    public String addUser() {
+    public String addUser(Model model) {
+        model.addAttribute("admin", new Admin());
         return "user_add_panel";
     }
 
@@ -99,7 +97,7 @@ public class AdminController {
     }
 
     @PostMapping("/users/edit")
-    public String saveUser(@ModelAttribute Admin admin) {
+    public String editUser(@ModelAttribute Admin admin) {
         Optional<Admin> user = adminRepository.findById(admin.getId());
 
         user.ifPresent(o -> {
@@ -114,6 +112,20 @@ public class AdminController {
         }
 
         return "redirect:/admin/users";
+    }
+
+    @PostMapping("/users/add")
+    public String saveUserPost(@ModelAttribute Admin admin, Model model) {
+        Optional<Admin> user = Optional.ofNullable(adminRepository.findByLogin(admin.getLogin()));
+
+        if(user.isPresent()) {
+            model.addAttribute("message", new Message("Błąd", "Użytkownik z podanym loginem już istnieje."));
+            return "message";
+        } else {
+            adminRepository.save(admin);
+            model.addAttribute("message", new Message("Sukces", "Użytkownik został pomyślnie utworzony."));
+            return "message";
+        }
     }
 
     private String getUser(Admin admin, Model model) {
