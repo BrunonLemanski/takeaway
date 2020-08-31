@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
     Optional<Item> findByNameIgnoreCase(String name);
+    Item findByName(String name);
 }

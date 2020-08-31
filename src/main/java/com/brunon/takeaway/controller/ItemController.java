@@ -59,4 +59,36 @@ public class ItemController {
         });
         return "redirect:/admin/products";
     }
+
+    @GetMapping("/admin/product/add")
+    public String addItemGet(Model model) {
+        model.addAttribute("item", new Item());
+        return "product_add";
+    }
+
+    @PostMapping("/admin/product/add")
+    public String addItemPost(@ModelAttribute Item item, Model model) {
+        Optional<Item> item1 = Optional.ofNullable(itemRepository.findByName(item.getName()));
+
+        if(item1.isPresent()) {
+            model.addAttribute("message", new Message("Błąd", "Produkt o podanej nazwie już istnieje w bazie danych."));
+            return "message";
+        } else {
+            itemRepository.save(item);
+            model.addAttribute("message", new Message("Sukces", "Produkt został dodany do oferty"));
+            return "message";
+        }
+    }
+
+    //NOTE: --- Could not delete product from list when orders with specific product exists in database.
+/*    @GetMapping("/admin/product/remove/{id}")
+    public String removeItem(@PathVariable Long id, Model model) {
+        Optional<Item> item = itemRepository.findById(id);
+
+        item.ifPresent(i -> {
+            itemRepository.deleteById(id);
+            model.addAttribute("message", new Message("Sukces", "Produkt został usunięty z oferty"));
+        });
+        return "message";
+    }*/
 }
