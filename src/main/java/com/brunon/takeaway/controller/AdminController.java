@@ -32,12 +32,6 @@ public class AdminController {
         return "admin"; //resources/templates/admin.html
     }
 
-    @GetMapping("/users/add")
-    public String addUser(Model model) {
-        model.addAttribute("admin", new Admin());
-        return "user_add_panel";
-    }
-
     @GetMapping("/orders")
     public String getAllOrders(@RequestParam(required = false) OrderStatus status, Model model) {
         List<Order> orders;
@@ -112,6 +106,12 @@ public class AdminController {
         }
 
         return "redirect:/admin/users";
+    }
+
+    @GetMapping("/users/add")
+    public String addUser(Model model) {
+        model.addAttribute("admin", new Admin());
+        return "user_add_panel";
     }
 
     @PostMapping("/users/add")

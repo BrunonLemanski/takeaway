@@ -10,12 +10,10 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
 
-    <link href="/css/album.css" rel="stylesheet"/>
     <link href="/css/home.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
 </head>
 <body>
-
 <header>
     <div class="collapse bg-dark" id="navbarHeader">
         <div class="container">
@@ -51,66 +49,39 @@
 </header>
 
 <main role="main">
-
-    <section class="jumbotron text-center">
-        <div class="container"></div>
-    </section>
-
     <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Produkty</h5>
-                        <p class="card-text">Tutaj możesz dodać nowe produkty do swojej oferty</p>
-                        <a th:href="@{/admin/products/add}" href="#" class="card-link">Dodaj</a>
-                        <a th:href="@{/admin/products}" href="#" class="card-link">Lista produktów</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Zamówienia</h5>
-                        <p class="card-text">Tutaj znajdziesz wszystkie zamówienia, które zostały złożone przez użytkowników</p>
-                        <a th:href="@{/admin/orders(status=${T(com.brunon.takeaway.model.OrderStatus).NEW.name()})}" href="#" class="card-link">Nowe</a>
-                        <a th:href="@{/admin/orders}" href="#" class="card-link">Wszystkie</a>
-                    </div>
-                    <div th:if="${new_orders == 0}">
-                        <div class="card-footer text-muted">
-                            Brak nowych zamówień
-                        </div>
-                    </div>
-                    <div th:if="${new_orders != 0}">
-                        <div th:if="${new_orders eq 1}">
-                            <div class="card-footer text-muted" th:text="|${new_orders} nowe zamówienie|">
-                                1 nowe zamówienie
-                            </div>
-                        </div>
-                        <div th:if="${new_orders gt 1 and new_orders lt 5}">
-                            <div class="card-footer text-muted" th:text="|${new_orders} nowe zamówienia|">
-                                3 nowe zamówienia
-                            </div>
-                        </div>
-                        <div th:if="${new_orders gt 4}">
-                            <div class="card-footer text-muted" th:text="|${new_orders} nowych zamówień|">
-                                10 nowych zamówień
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card mb-4 shadow-sm" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Użytkownicy</h5>
-                        <p class="card-text">Tutaj możesz zarządzać kontami z dostępnem do panelu administratora. </p>
-                        <a th:href="@{/admin/users/add}" href="#" class="card-link">Dodaj</a>
-                        <a th:href="@{/admin/users}" href="#" class="card-link">Lista użytkowników</a>
-                    </div>
-                </div>
+        <br/>
+        <div class="col-lg-8 offset-lg-2">
+            <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                <h3 class="display-4">Oferta produktów</h3>
+                <a class="btn btn-sm btn-outline-info d-inline" th:href="@{/admin}" href="#" role="button">Powrót do panelu administratora</a>
+                <br/>
+                <br/>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Cena</th>
+                        <th scope="col">...</th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr th:each="item, idx: ${items}">
+                        <th scope="row" th:text="${idx.index+1}">1</th>
+                        <td th:text="${item.name}">Capriciosa</td>
+                        <td th:text="|${item.price} zł|">28.9 zł</td>
+                        <td>
+                            <a th:href="@{|/admin/product/${item.id}|}">
+                                <svg width="25" height="25" viewBox="0 0 16 16" class="bi bi-pencil-square" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                </svg>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
