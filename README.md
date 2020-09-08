@@ -23,9 +23,13 @@ Website to ordering food and managing orders
 
 ## Admin Page:
 ![Admin Page](https://github.com/BrunonLemanski/takeaway/blob/master/screenshots/screenshot8.png)
+![Admin](https://github.com/BrunonLemanski/takeaway/blob/master/screenshots/orders_admin_gif.gif)
 
 ## Order Details:
 ![Order Details](https://github.com/BrunonLemanski/takeaway/blob/master/screenshots/screenshot9.png)
 
 ## Ordering Products:
 ![Ordering Products](https://github.com/BrunonLemanski/takeaway/blob/master/screenshots/orders_gif.gif)
+
+## Products Editing:
+![Products Editing](https://github.com/BrunonLemanski/takeaway/blob/master/screenshots/products_gir.gif)
