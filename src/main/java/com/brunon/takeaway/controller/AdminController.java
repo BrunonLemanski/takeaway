@@ -10,10 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -126,6 +127,35 @@ public class AdminController {
             model.addAttribute("message", new Message("Sukces", "Użytkownik został pomyślnie utworzony."));
             return "message";
         }
+    }
+
+    @GetMapping("/set-cookie")
+    public String setCookie(HttpServletResponse response, Model model) {
+        Cookie cookie = new Cookie("cookie", "Test");
+
+        response.addCookie(cookie);
+        return "Cookie have been changed";
+    }
+
+    @GetMapping("/read-cookie")
+    public String readCookie(HttpServletRequest request, Model model) {
+        Cookie[] cookies = request.getCookies();
+
+        StringBuilder result = new StringBuilder();
+
+        if(cookies != null) {
+            for (Cookie cookie: cookies) {
+                result.append(cookie.getName());
+                result.append(cookie.getValue());
+                result.append(" ");
+            }
+
+            model.addAttribute("cookie", result.toString());
+        }else {
+            model.addAttribute("cookie", "no cookie");
+        }
+
+        return "cookies";
     }
 
     private String getUser(Admin admin, Model model) {

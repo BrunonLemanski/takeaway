@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <meta name="author" content="Brunon Lemański">
+    <meta name="author" content="Konrad Kozłowski">
     <meta name="generator" content="Jekyll v4.1.1">
     <title>TakeAway</title>
 
@@ -94,11 +94,11 @@
                     </div>-->
                     <div class="form-group">
                         <label for="addressInput">Adres dostawy</label>
-                        <input type="text" class="form-control" id="addressInput" name="address" placeholder="Adres dostawy">
+                        <input type="text" class="form-control" id="addressInput" name="address" placeholder="Adres dostawy" th:value="${address}">
                     </div>
                     <div class="form-group">
                         <label for="phoneNumberInput">Telefon</label>
-                        <input type="tel" class="form-control" id="phoneNumberInput" name="phoneNumber" placeholder="Telefon">
+                        <input type="tel" class="form-control" id="phoneNumberInput" name="phoneNumber" placeholder="Telefon" th:value="${phone}">
                     </div>
                     <a class="btn btn-outline-info" th:href="@{/}" href="#" role="button">Powrót do strony głównej</a>
                     <button class="btn btn-primary">Zamów</button>

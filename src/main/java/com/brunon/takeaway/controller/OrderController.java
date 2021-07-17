@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @Controller
@@ -45,7 +48,20 @@ public class OrderController {
     }
 
     @GetMapping("")
-    public String getOrder(Model model) {
+    public String getOrder(Model model, HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if(cookie.getName().equals("phone")) {
+                    model.addAttribute("phone", cookie.getValue());
+                }
+                if (cookie.getName().equals("address")) {
+                    model.addAttribute("address", cookie.getValue().replaceAll("_", " ").replaceAll("[.]", ","));
+                }
+            }
+        }
+
         model.addAttribute("order", clientOrder.getOrder());
         model.addAttribute("sum", clientOrder
         .getOrder()
@@ -71,7 +87,12 @@ public class OrderController {
     }
 
     @PostMapping("/save")
-    public String saveOrderInDatabase(@RequestParam String address, @RequestParam String phoneNumber, Model model) {
+    public String saveOrderInDatabase(@RequestParam String address, @RequestParam String phoneNumber, Model model, HttpServletResponse response) {
+        Cookie cookie = new Cookie("phone", phoneNumber.replaceAll(" ", ""));
+        Cookie cookie1 = new Cookie("address", address.replaceAll(" ", "_").replaceAll(",", "."));
+        response.addCookie(cookie);
+        response.addCookie(cookie1);
+
         Order order = clientOrder.getOrder();
         order.setAddress(address);
         order.setTelephone(phoneNumber);
