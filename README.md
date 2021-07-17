@@ -1,6 +1,8 @@
 # TakeAway
 Website to ordering food and managing orders
 
+Site: https://takeaway-brunon.herokuapp.com/
+
 ## Technology
 - Backend:  Java
 - Frontend: Thymeleaf
